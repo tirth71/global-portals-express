@@ -14,27 +14,31 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-card">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-card border-b border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Ship className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-primary">Global Portals Express</span>
+          <div className="flex items-center space-x-2 group">
+            <div className="relative">
+              <Ship className="h-8 w-8 text-primary group-hover:text-secondary transition-colors duration-300 group-hover:animate-float" />
+              <div className="absolute inset-0 bg-secondary/20 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+            </div>
+            <span className="text-xl font-bold text-primary group-hover:text-secondary transition-colors duration-300">Global Portals Express</span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-smooth font-medium"
+                className="relative text-foreground hover:text-primary transition-colors duration-300 font-medium group"
               >
                 {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-accent group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
-            <Button variant="ocean" size="sm">
+            <Button variant="ocean" size="sm" className="hover:scale-105 transition-transform duration-300">
               Get Quote
             </Button>
           </div>
@@ -52,19 +56,20 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
+          <div className="md:hidden py-4 border-t border-border animate-slide-up bg-white/95 backdrop-blur-md rounded-b-lg">
             <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-foreground hover:text-primary transition-smooth font-medium px-2"
+                  className="text-foreground hover:text-primary transition-colors duration-300 font-medium px-2 py-1 rounded-lg hover:bg-secondary/10 animate-fade-in-left"
                   onClick={() => setIsOpen(false)}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {item.name}
                 </a>
               ))}
-              <Button variant="ocean" size="sm" className="mx-2 w-fit">
+              <Button variant="ocean" size="sm" className="mx-2 w-fit animate-scale-in delay-500">
                 Get Quote
               </Button>
             </div>

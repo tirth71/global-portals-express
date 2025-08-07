@@ -9,6 +9,7 @@ const Services = () => {
       title: "Agriculture Products",
       description: "Premium quality agricultural exports including grains, spices, and organic produce",
       features: ["Organic Certification", "Quality Testing", "Cold Chain Logistics", "Custom Packaging"],
+      products: ["Basmati Rice", "Wheat", "Soybeans", "Black Pepper", "Turmeric", "Cardamom", "Tea Leaves", "Coffee Beans"],
       color: "bg-green-500/10 text-green-600"
     },
     {
@@ -16,6 +17,7 @@ const Services = () => {
       title: "Electronics & Machinery",
       description: "Advanced technology products and industrial machinery for global markets",
       features: ["Technical Support", "Warranty Coverage", "Installation Assistance", "Bulk Orders"],
+      products: ["Industrial Pumps", "CNC Machines", "LED Displays", "Solar Panels", "Electrical Components", "Motors", "Sensors", "Control Systems"],
       color: "bg-blue-500/10 text-blue-600"
     },
     {
@@ -23,6 +25,7 @@ const Services = () => {
       title: "Chemicals & Minerals",
       description: "Industrial chemicals and mineral products with certified quality standards",
       features: ["Safety Compliance", "MSDS Documentation", "Specialized Handling", "Regulatory Support"],
+      products: ["Iron Ore", "Aluminum Oxide", "Caustic Soda", "Sulfuric Acid", "Polymers", "Fertilizers", "Pigments", "Industrial Salts"],
       color: "bg-purple-500/10 text-purple-600"
     },
     {
@@ -30,6 +33,7 @@ const Services = () => {
       title: "Textile & Apparel",
       description: "Fashion and textile products from renowned manufacturers worldwide",
       features: ["Fashion Trends", "Quality Fabrics", "Custom Designs", "Sustainable Materials"],
+      products: ["Cotton Fabrics", "Silk Garments", "Denim Jeans", "Sportswear", "Home Textiles", "Leather Goods", "Handicrafts", "Embroidered Items"],
       color: "bg-pink-500/10 text-pink-600"
     }
   ];
@@ -71,14 +75,31 @@ const Services = () => {
                 <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">{service.description}</p>
               </CardHeader>
               <CardContent className="relative z-10">
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  {service.features.map((feature, featureIndex) => (
-                    <div key={feature} className="flex items-center space-x-2 group/feature animate-fade-in-left" style={{ animationDelay: `${(index * 200) + (featureIndex * 100)}ms` }}>
-                      <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0 group-hover/feature:animate-pulse-glow group-hover/feature:scale-125 transition-transform duration-300"></div>
-                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">{feature}</span>
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <h4 className="text-sm font-semibold text-secondary mb-2">Key Features:</h4>
+                    <div className="grid grid-cols-2 gap-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <div key={feature} className="flex items-center space-x-2 group/feature animate-fade-in-left" style={{ animationDelay: `${(index * 200) + (featureIndex * 100)}ms` }}>
+                          <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0 group-hover/feature:animate-pulse-glow group-hover/feature:scale-125 transition-transform duration-300"></div>
+                          <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300">{feature}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-sm font-semibold text-secondary mb-2">Our Products:</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {service.products.map((product, productIndex) => (
+                        <span key={product} className="text-xs bg-secondary/10 text-secondary px-2 py-1 rounded-full hover:bg-secondary hover:text-white transition-all duration-300 cursor-pointer animate-scale-in" style={{ animationDelay: `${(index * 200) + (productIndex * 50)}ms` }}>
+                          {product}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
+                
                 <Button variant="outline" className="w-full group/btn relative overflow-hidden">
                   <span className="relative z-10">Learn More</span>
                   <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300 relative z-10" />

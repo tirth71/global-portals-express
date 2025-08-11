@@ -30,7 +30,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            About <span className="text-secondary">Global Portals Express</span>
+            About <span className="text-secondary">Udaan</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Established with a vision to connect global markets, we are your trusted partner in international trade, 

@@ -58,7 +58,7 @@ const WhyChooseUs = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 animate-fade-in">
             Why Choose <span className="text-secondary relative">
-              Global Portals Express
+              Udaan
               <div className="absolute inset-0 bg-gradient-shimmer animate-shimmer opacity-20"></div>
             </span>
           </h2>

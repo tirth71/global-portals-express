@@ -41,8 +41,8 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-2 mb-6">
-                <Ship className="h-8 w-8 text-accent" />
-                <span className="text-2xl font-bold">Global Portals Express</span>
+                <Ship className="h-8 w-8 text-accent animate-float" />
+                <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-secondary to-accent">Udaan</span>
               </div>
               <p className="text-primary-foreground/80 mb-6 leading-relaxed">
                 Your trusted partner in international trade, connecting markets globally with 
@@ -113,7 +113,7 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-primary-foreground/80 text-sm">
-              © 2024 Global Portals Express. All rights reserved.
+              © 2024 Udaan. All rights reserved.
             </div>
             
             {/* Social Links */}

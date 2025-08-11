@@ -14,7 +14,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-card border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-card border-b border-border/50 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -23,7 +23,7 @@ const Navbar = () => {
               <Ship className="h-8 w-8 text-primary group-hover:text-secondary transition-colors duration-300 group-hover:animate-float" />
               <div className="absolute inset-0 bg-secondary/20 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
             </div>
-            <span className="text-xl font-bold text-primary group-hover:text-secondary transition-colors duration-300">Global Portals Express</span>
+            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-secondary to-accent group-hover:opacity-90 transition-colors duration-300">Udaan</span>
           </div>
 
           {/* Desktop Navigation */}

@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServiceBySlug, services } from "@/data/services";
+import { getProductDetail } from "@/data/products";
 import agricultureImg from "@/assets/products/agriculture.jpg";
 import machineryImg from "@/assets/products/machinery.jpg";
 import chemicalsImg from "@/assets/products/chemicals.jpg";

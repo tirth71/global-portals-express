@@ -3,6 +3,20 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServiceBySlug, services } from "@/data/services";
+import agricultureImg from "@/assets/products/agriculture.jpg";
+import machineryImg from "@/assets/products/machinery.jpg";
+import chemicalsImg from "@/assets/products/chemicals.jpg";
+import textilesImg from "@/assets/products/textiles.jpg";
+
+const categoryImageMap: Record<string, string> = {
+  "agriculture-products": agricultureImg,
+  "electronics-machinery": machineryImg,
+  "chemicals-minerals": chemicalsImg,
+  "textile-apparel": textilesImg,
+};
+
+const toSlug = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 const ServiceDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -108,22 +122,32 @@ const ServiceDetails = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  {service.products.map((product) => (
-                    <div key={product} className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden hover-scale">
-                      <img
-                        src="/placeholder.svg"
-                        alt={`${product} - ${service.title} by Udaan`}
-                        loading="lazy"
-                        className="w-full h-40 object-cover bg-muted"
-                      />
-                      <div className="p-4">
-                        <h3 className="font-semibold">{product}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Premium {product.toLowerCase()} from trusted suppliers, quality-checked and export-ready.
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                  {service.products.map((product) => {
+                    const productSlug = toSlug(product);
+                    const imgSrc = categoryImageMap[service.slug];
+                    return (
+                      <Link
+                        to={`/services/${service.slug}/${productSlug}`}
+                        key={product}
+                        className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden hover-scale block focus:outline-none focus:ring-2 focus:ring-primary"
+                        aria-label={`View details for ${product}`}
+                      >
+                        <img
+                          src={imgSrc}
+                          alt={`${product} - ${service.title} by Udaan`}
+                          loading="lazy"
+                          className="w-full h-40 object-cover bg-muted"
+                        />
+                        <div className="p-4">
+                          <h3 className="font-semibold">{product}</h3>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Premium {product.toLowerCase()} from trusted suppliers, quality-checked and export-ready.
+                          </p>
+                          <span className="text-sm text-primary story-link mt-2 inline-block">View details</span>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>

@@ -103,11 +103,11 @@ const ProductDetails = () => {
             <span className="mx-2">/</span>
             <Link to={`/services/${service.slug}`} className="story-link">{service.title}</Link>
             <span className="mx-2">/</span>
-            <span className="text-foreground">{productName}</span>
+            <span className="text-foreground">{name}</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold">{productName} – Full Details</h1>
+          <h1 className="text-3xl md:text-4xl font-bold">{name} – Full Details</h1>
           <p className="text-muted-foreground mt-2 max-w-3xl">
-            Premium {productName.toLowerCase()} from our {service.title.toLowerCase()} category. Export-ready, quality-checked, and compliant with international standards.
+            Premium {name.toLowerCase()} from our {service.title.toLowerCase()} category. Export-ready, quality-checked, and compliant with international standards.
           </p>
         </header>
 
@@ -117,7 +117,7 @@ const ProductDetails = () => {
               <CardContent className="p-0">
                 <img
                   src={imgSrc}
-                  alt={`${productName} - ${service.title} by Udaan`}
+                  alt={`${name} - ${service.title} by Udaan`}
                   loading="lazy"
                   className="w-full h-72 object-cover bg-muted"
                 />
@@ -132,10 +132,18 @@ const ProductDetails = () => {
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-muted-foreground">
                   <li><span className="font-semibold text-foreground">Category:</span> {service.title}</li>
                   <li><span className="font-semibold text-foreground">Brand:</span> Udaan</li>
-                  <li><span className="font-semibold text-foreground">Packaging:</span> Custom as per requirement</li>
-                  <li><span className="font-semibold text-foreground">MOQ:</span> Flexible (bulk orders welcomed)</li>
-                  <li><span className="font-semibold text-foreground">Quality:</span> Export grade, inspected</li>
-                  <li><span className="font-semibold text-foreground">Availability:</span> In stock</li>
+                  {detail?.specs?.length ? (
+                    detail.specs.map((s) => (
+                      <li key={s.label}><span className="font-semibold text-foreground">{s.label}:</span> {s.value}</li>
+                    ))
+                  ) : (
+                    <>
+                      <li><span className="font-semibold text-foreground">Packaging:</span> Custom as per requirement</li>
+                      <li><span className="font-semibold text-foreground">MOQ:</span> Flexible (bulk orders welcomed)</li>
+                      <li><span className="font-semibold text-foreground">Quality:</span> Export grade, inspected</li>
+                      <li><span className="font-semibold text-foreground">Availability:</span> In stock</li>
+                    </>
+                  )}
                 </ul>
               </CardContent>
             </Card>

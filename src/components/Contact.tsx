@@ -4,37 +4,29 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: "Phone",
-      details: ["+1 (555) 123-4567", "+1 (555) 987-6543"],
-      description: "Call us for immediate assistance"
-    },
-    {
-      icon: Mail,
-      title: "Email",
-      details: ["info@globalportalsexpress.com", "sales@globalportalsexpress.com"],
-      description: "Send us your inquiries anytime"
-    },
-    {
-      icon: MapPin,
-      title: "Address",
-      details: ["123 International Trade Center", "Business District, NY 10001"],
-      description: "Visit our headquarters"
-    },
-    {
-      icon: Clock,
-      title: "Business Hours",
-      details: ["Mon - Fri: 9:00 AM - 6:00 PM", "Sat: 10:00 AM - 4:00 PM"],
-      description: "We're here when you need us"
-    }
-  ];
-
-  return (
-    <section id="contact" className="py-20 bg-muted/30">
+  const contactInfo = [{
+    icon: Phone,
+    title: "Phone",
+    details: ["+1 (555) 123-4567", "+1 (555) 987-6543"],
+    description: "Call us for immediate assistance"
+  }, {
+    icon: Mail,
+    title: "Email",
+    details: ["info@globalportalsexpress.com", "sales@globalportalsexpress.com"],
+    description: "Send us your inquiries anytime"
+  }, {
+    icon: MapPin,
+    title: "Address",
+    details: ["123 International Trade Center", "Business District, NY 10001"],
+    description: "Visit our headquarters"
+  }, {
+    icon: Clock,
+    title: "Business Hours",
+    details: ["Mon - Fri: 9:00 AM - 6:00 PM", "Sat: 10:00 AM - 4:00 PM"],
+    description: "We're here when you need us"
+  }];
+  return <section id="contact" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -50,8 +42,9 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="lg:col-span-1">
             <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <Card key={info.title} className="group hover:shadow-float transition-all duration-500 animate-fade-in hover:scale-105 border-0 relative overflow-hidden hover:-rotate-1" style={{ animationDelay: `${index * 150}ms` }}>
+              {contactInfo.map((info, index) => <Card key={info.title} className="group hover:shadow-float transition-all duration-500 animate-fade-in hover:scale-105 border-0 relative overflow-hidden hover:-rotate-1" style={{
+              animationDelay: `${index * 150}ms`
+            }}>
                   {/* Shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-shimmer translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 opacity-10"></div>
                   
@@ -64,16 +57,13 @@ const Contact = () => {
                       <div>
                         <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-secondary transition-colors duration-300">{info.title}</h3>
                         <p className="text-sm text-muted-foreground mb-2 group-hover:text-foreground transition-colors duration-300">{info.description}</p>
-                        {info.details.map((detail, idx) => (
-                          <p key={idx} className="text-sm text-foreground font-medium group-hover:text-secondary transition-colors duration-300">{detail}</p>
-                        ))}
+                        {info.details.map((detail, idx) => <p key={idx} className="text-sm text-foreground font-medium group-hover:text-secondary transition-colors duration-300">{detail}</p>)}
                       </div>
                     </div>
                     {/* Animated bottom border */}
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-secondary to-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
 
@@ -122,11 +112,7 @@ const Contact = () => {
                 
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="Please provide details about your export requirements, quantities, destinations, and timeline..."
-                    className="min-h-[120px]"
-                  />
+                  <Textarea id="message" placeholder="Please provide details about your export requirements, quantities, destinations, and timeline..." className="min-h-[120px]" />
                 </div>
                 
                 <Button variant="hero" size="lg" className="w-full group relative overflow-hidden animate-slide-up delay-700">
@@ -141,26 +127,10 @@ const Contact = () => {
         {/* Map Section */}
         <div className="mt-16">
           <Card className="overflow-hidden shadow-hero hover:shadow-neon transition-all duration-700 group animate-scale-in delay-1000">
-            <div className="h-64 bg-gradient-to-br from-muted/30 to-muted/60 flex items-center justify-center relative overflow-hidden">
-              {/* Animated background particles */}
-              <div className="absolute top-8 left-12 w-2 h-2 bg-secondary/30 rounded-full animate-float"></div>
-              <div className="absolute bottom-12 right-16 w-3 h-3 bg-accent/20 rounded-full animate-float-delayed"></div>
-              <div className="absolute top-16 right-8 w-1 h-1 bg-primary/40 rounded-full animate-float"></div>
-              
-              <div className="text-center relative z-10">
-                <div className="relative mb-4">
-                  <MapPin className="h-12 w-12 text-secondary mx-auto group-hover:animate-pulse group-hover:text-accent transition-colors duration-500" />
-                  <div className="absolute inset-0 bg-secondary/20 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-secondary transition-colors duration-300">Visit Our Office</h3>
-                <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">123 International Trade Center, Business District, NY 10001</p>
-              </div>
-            </div>
+            
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;

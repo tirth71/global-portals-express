@@ -2,8 +2,11 @@ import { useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { getServiceBySlug } from "@/data/services";
 import { getProductDetail } from "@/data/products";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import agricultureImg from "@/assets/products/agriculture.jpg";
 import machineryImg from "@/assets/products/machinery.jpg";
 import chemicalsImg from "@/assets/products/chemicals.jpg";
@@ -93,100 +96,197 @@ const ProductDetails = () => {
   const imgSrc = detail?.image || categoryImageMap[service.slug];
 
   return (
-    <main className="py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header className="mb-12">
-          <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted-foreground">
-            <Link to="/" className="story-link">Home</Link>
-            <span className="mx-2">/</span>
-            <Link to="/" className="story-link">Services</Link>
-            <span className="mx-2">/</span>
-            <Link to={`/services/${service.slug}`} className="story-link">{service.title}</Link>
-            <span className="mx-2">/</span>
-            <span className="text-foreground">{name}</span>
-          </nav>
-          <h1 className="text-3xl md:text-4xl font-bold">{name} – Full Details</h1>
-          <p className="text-muted-foreground mt-2 max-w-3xl">
-            Premium {name.toLowerCase()} from our {service.title.toLowerCase()} category. Export-ready, quality-checked, and compliant with international standards.
-          </p>
-        </header>
+    <div className="min-h-screen">
+      <Navbar />
+      <main className="py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <header className="mb-12 animate-fade-in">
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm">
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <Link to="/" className="story-link hover:text-primary">Home</Link>
+                <span>/</span>
+                <Link to="/#services" className="story-link hover:text-primary">Services</Link>
+                <span>/</span>
+                <Link to={`/services/${service.slug}`} className="story-link hover:text-primary">{service.title}</Link>
+                <span>/</span>
+                <span className="text-foreground font-medium">{name}</span>
+              </div>
+            </nav>
+            
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
+                  {name}
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-3xl">
+                  Premium {name.toLowerCase()} from our {service.title.toLowerCase()} category. Export-ready, quality-checked, and compliant with international standards.
+                </p>
+              </div>
+              <Badge variant="secondary" className="px-4 py-2 text-sm w-fit">
+                {service.title}
+              </Badge>
+            </div>
+          </header>
 
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <article className="lg:col-span-2 space-y-6">
-            <Card>
-              <CardContent className="p-0">
-                <img
-                  src={imgSrc}
-                  alt={`${name} - ${service.title} by Udaan`}
-                  loading="lazy"
-                  className="w-full h-72 object-cover bg-muted"
-                />
-              </CardContent>
-            </Card>
+          <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <article className="lg:col-span-2 space-y-8">
+              {/* Hero Image */}
+              <Card className="overflow-hidden hover-scale">
+                <CardContent className="p-0">
+                  <div className="relative group">
+                    <img
+                      src={imgSrc}
+                      alt={`${name} - ${service.title} by Udaan`}
+                      loading="lazy"
+                      className="w-full h-80 md:h-96 object-cover bg-muted transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Badge variant="secondary" className="mb-2">
+                        Premium Quality
+                      </Badge>
+                      <p className="text-white text-sm">Export-ready • Quality Assured • International Standards</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Product Specifications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-muted-foreground">
-                  <li><span className="font-semibold text-foreground">Category:</span> {service.title}</li>
-                  <li><span className="font-semibold text-foreground">Brand:</span> Udaan</li>
-                  {detail?.specs?.length ? (
-                    detail.specs.map((s) => (
-                      <li key={s.label}><span className="font-semibold text-foreground">{s.label}:</span> {s.value}</li>
-                    ))
-                  ) : (
-                    <>
-                      <li><span className="font-semibold text-foreground">Packaging:</span> Custom as per requirement</li>
-                      <li><span className="font-semibold text-foreground">MOQ:</span> Flexible (bulk orders welcomed)</li>
-                      <li><span className="font-semibold text-foreground">Quality:</span> Export grade, inspected</li>
-                      <li><span className="font-semibold text-foreground">Availability:</span> In stock</li>
-                    </>
-                  )}
-                </ul>
-              </CardContent>
-            </Card>
-          </article>
+              {/* Product Description */}
+              <Card className="animate-fade-in">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    Product Overview
+                    <Badge variant="outline">Featured</Badge>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {detail?.description || `Premium quality ${name.toLowerCase()} sourced directly from trusted suppliers. Our ${service.title.toLowerCase()} products meet international export standards and undergo rigorous quality control processes to ensure excellence in every shipment.`}
+                  </p>
+                </CardContent>
+              </Card>
 
-          <aside className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Why choose Udaan?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                  {service.features.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+              {/* Product Specifications */}
+              <Card className="animate-fade-in">
+                <CardHeader>
+                  <CardTitle>Technical Specifications</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center py-3 border-b border-border/50">
+                        <span className="font-medium text-foreground">Category</span>
+                        <span className="text-muted-foreground">{service.title}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-3 border-b border-border/50">
+                        <span className="font-medium text-foreground">Brand</span>
+                        <span className="text-muted-foreground">Udaan</span>
+                      </div>
+                      {detail?.specs?.slice(0, Math.ceil(detail.specs.length / 2)).map((s) => (
+                        <div key={s.label} className="flex justify-between items-center py-3 border-b border-border/50">
+                          <span className="font-medium text-foreground">{s.label}</span>
+                          <span className="text-muted-foreground">{s.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="space-y-4">
+                      {detail?.specs?.slice(Math.ceil(detail.specs.length / 2)).map((s) => (
+                        <div key={s.label} className="flex justify-between items-center py-3 border-b border-border/50">
+                          <span className="font-medium text-foreground">{s.label}</span>
+                          <span className="text-muted-foreground">{s.value}</span>
+                        </div>
+                      )) || (
+                        <>
+                          <div className="flex justify-between items-center py-3 border-b border-border/50">
+                            <span className="font-medium text-foreground">Packaging</span>
+                            <span className="text-muted-foreground">Custom as per requirement</span>
+                          </div>
+                          <div className="flex justify-between items-center py-3 border-b border-border/50">
+                            <span className="font-medium text-foreground">MOQ</span>
+                            <span className="text-muted-foreground">Flexible (bulk orders welcomed)</span>
+                          </div>
+                          <div className="flex justify-between items-center py-3 border-b border-border/50">
+                            <span className="font-medium text-foreground">Quality</span>
+                            <span className="text-muted-foreground">Export grade, inspected</span>
+                          </div>
+                          <div className="flex justify-between items-center py-3 border-b border-border/50">
+                            <span className="font-medium text-foreground">Availability</span>
+                            <span className="text-muted-foreground">In stock</span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </article>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Request a Quote</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-muted-foreground">Share your quantity, destination, and specifications to receive a tailored quote.</p>
-                <Button asChild variant="accent" className="w-full">
-                  <Link to="/#contact">Contact Udaan</Link>
+            <aside className="space-y-6">
+              {/* Why Choose Us */}
+              <Card className="animate-fade-in sticky top-24">
+                <CardHeader>
+                  <CardTitle className="text-lg">Why Choose Udaan?</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {service.features.map((f, index) => (
+                      <li key={f} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-muted-foreground text-sm">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* Quick Contact */}
+              <Card className="animate-fade-in bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="text-lg">Get Instant Quote</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground text-sm">
+                    Ready to export? Share your quantity, destination, and specifications for a tailored quote within 24 hours.
+                  </p>
+                  <div className="space-y-3">
+                    <Button asChild variant="default" className="w-full">
+                      <Link to="/#contact">Request Quote</Link>
+                    </Button>
+                    <Button asChild variant="outline" className="w-full">
+                      <Link to={`/services/${service.slug}`}>View More Products</Link>
+                    </Button>
+                  </div>
+                  <div className="pt-3 border-t border-border/50">
+                    <p className="text-xs text-muted-foreground text-center">
+                      📞 Call us: +1 (555) 123-4567<br />
+                      ✉️ Email: info@globalportalsexpress.com
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </aside>
+          </section>
+
+          {/* Navigation Footer */}
+          <div className="mt-16 pt-8 border-t border-border/50">
+            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
+              <div className="flex gap-3">
+                <Button asChild variant="outline" className="hover-scale">
+                  <Link to={`/services/${service.slug}`}>← Back to {service.title}</Link>
                 </Button>
-              </CardContent>
-            </Card>
-          </aside>
-        </section>
-
-        <div className="mt-10 flex gap-3">
-          <Button asChild variant="outline">
-            <Link to={`/services/${service.slug}`}>← Back to {service.title}</Link>
-          </Button>
-          <Button asChild variant="secondary">
-            <Link to="/#services">Explore Other Categories</Link>
-          </Button>
+                <Button asChild variant="secondary" className="hover-scale">
+                  <Link to="/#services">Explore Categories</Link>
+                </Button>
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Need help? <Link to="/#contact" className="story-link text-primary">Contact our experts</Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   );
 };
 
